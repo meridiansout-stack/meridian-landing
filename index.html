@@ -9,7 +9,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #080f18;
+      --bg: #020408;
       --bg2: #0d1b26;
       --cyan: #7ec8e3;
       --cyan-dim: rgba(126,200,227,0.12);
@@ -19,131 +19,137 @@
       --gray-light: #8a9ab0;
     }
 
-    html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
-  background: #020408;
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
 
-    /* GRID DE FONDO */
     body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(126,200,227,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(126,200,227,0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
-}
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(126,200,227,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126,200,227,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(14,165,233,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(124,58,237,0.05) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(14,165,233,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(124,58,237,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 6vw;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(2,4,8,0.7);
+      border-bottom: 1px solid rgba(126,200,227,0.06);
+      transition: padding 0.4s ease, background 0.4s ease;
+    }
+    nav.scrolled {
+      padding: 0.8rem 6vw;
+      background: rgba(2,4,8,0.92);
+      border-bottom-color: rgba(126,200,227,0.1);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 6px;
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #020408;
+      background: var(--cyan);
+      padding: 0.6rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      transition: opacity 0.3s, transform 0.3s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
     /* DECORATIVOS */
-.corner {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  z-index: 50;
-  pointer-events: none;
-}
-.corner-tl { top: 20px; left: 20px; border-top: 1px solid rgba(126,200,227,0.3); border-left: 1px solid rgba(126,200,227,0.3); }
-.corner-tr { top: 20px; right: 20px; border-top: 1px solid rgba(126,200,227,0.3); border-right: 1px solid rgba(126,200,227,0.3); }
-.corner-bl { bottom: 20px; left: 20px; border-bottom: 1px solid rgba(126,200,227,0.3); border-left: 1px solid rgba(126,200,227,0.3); }
-.corner-br { bottom: 20px; right: 20px; border-bottom: 1px solid rgba(126,200,227,0.3); border-right: 1px solid rgba(126,200,227,0.3); }
+    .corner {
+      position: fixed;
+      width: 60px; height: 60px;
+      z-index: 50; pointer-events: none;
+    }
+    .corner-tl { top: 20px; left: 20px; border-top: 1px solid rgba(126,200,227,0.3); border-left: 1px solid rgba(126,200,227,0.3); }
+    .corner-tr { top: 20px; right: 20px; border-top: 1px solid rgba(126,200,227,0.3); border-right: 1px solid rgba(126,200,227,0.3); }
+    .corner-bl { bottom: 20px; left: 20px; border-bottom: 1px solid rgba(126,200,227,0.3); border-left: 1px solid rgba(126,200,227,0.3); }
+    .corner-br { bottom: 20px; right: 20px; border-bottom: 1px solid rgba(126,200,227,0.3); border-right: 1px solid rgba(126,200,227,0.3); }
 
-.side-text {
-  position: fixed;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 3px;
-  color: rgba(126,200,227,0.2);
-  z-index: 50;
-  pointer-events: none;
-}
-.side-text-left {
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
-  transform-origin: center;
-}
-.side-text-right {
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  transform-origin: center;
-}
+    .side-text {
+      position: fixed;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: rgba(126,200,227,0.2);
+      z-index: 50;
+      pointer-events: none;
+    }
+    .side-text-left { left: 20px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+    .side-text-right { right: 20px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(126,200,227,0.4), transparent);
+      z-index: 50; pointer-events: none;
+    }
 
-.top-bar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(126,200,227,0.4), transparent);
-  z-index: 50;
-  pointer-events: none;
-}
-    /* BADGES */
-.logo-wrap {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.2s;
-}
-
-.badge {
-  position: absolute;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--cyan);
-  background: rgba(126,200,227,0.07);
-  border: 1px solid rgba(126,200,227,0.2);
-  padding: 0.4rem 0.9rem;
-  border-radius: 2px;
-  white-space: nowrap;
-  animation: floatBadge 3s ease-in-out infinite;
-}
-
-.badge-1 {
-  top: 10px;
-  left: -120px;
-  animation-delay: 0s;
-}
-
-.badge-2 {
-  top: 50%;
-  right: -130px;
-  transform: translateY(-50%);
-  animation-delay: 1s;
-}
-
-.badge-3 {
-  bottom: 20px;
-  left: -110px;
-  animation-delay: 2s;
-}
-
-@keyframes floatBadge {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
     /* HERO */
     .hero {
       position: relative;
@@ -152,24 +158,21 @@ body::before {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 4rem 6vw;
+      padding: 6rem 6vw 3rem;
       text-align: center;
       z-index: 1;
     }
 
     .orb {
       position: absolute;
-      width: 500px;
-      height: 500px;
+      width: 500px; height: 500px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(126,200,227,0.06) 0%, transparent 70%);
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
 
-    /* LOGO CENTRADO */
     .logo-wrap {
       position: relative;
       z-index: 1;
@@ -179,16 +182,32 @@ body::before {
     }
 
     .logo-svg {
-  width: clamp(180px, 25vw, 240px);
-  height: clamp(180px, 25vw, 240px);
-}
-
-    .logo-svg circle {
-      animation: rotateSlow 20s linear infinite;
-      transform-origin: center;
+      width: clamp(180px, 25vw, 240px);
+      height: clamp(180px, 25vw, 240px);
     }
 
-    /* TAGLINE */
+    .badge {
+      position: absolute;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(126,200,227,0.07);
+      border: 1px solid rgba(126,200,227,0.2);
+      padding: 0.4rem 0.9rem;
+      white-space: nowrap;
+      animation: floatBadge 3s ease-in-out infinite;
+    }
+    .badge-1 { top: 10px; left: -120px; animation-delay: 0s; }
+    .badge-2 { top: 50%; right: -130px; transform: translateY(-50%); animation-delay: 1s; }
+    .badge-3 { bottom: 20px; left: -110px; animation-delay: 2s; }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
     .hero-tag {
       font-size: 0.7rem;
       letter-spacing: 4px;
@@ -202,57 +221,41 @@ body::before {
       gap: 0.8rem;
       justify-content: center;
     }
-
-    .hero-tag::before,
-    .hero-tag::after {
+    .hero-tag::before, .hero-tag::after {
       content: '';
       display: block;
-      width: 32px;
-      height: 1px;
+      width: 32px; height: 1px;
       background: var(--cyan-mid);
     }
 
-    /* TITULO */
     .hero-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1;
-  color: var(--white);
-  margin-bottom: 1.2rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.6s;
-  max-width: 780px;
-}
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+      max-width: 780px;
+    }
 
     .hero-title span {
-  background: linear-gradient(135deg, #0ea5e9, #22d3ee, #7c3aed);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: gradShift 4s ease infinite;
-}
+      background: linear-gradient(135deg, #0ea5e9, #22d3ee, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradShift 4s ease infinite;
+    }
 
-@keyframes gradShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    @keyframes gradShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-.typing::after {
-  content: '|';
-  color: var(--cyan);
-  animation: blink 0.7s step-end infinite;
-}
-
-@keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-    /* DESC */
     .hero-desc {
       font-size: 0.95rem;
       font-weight: 300;
@@ -264,7 +267,6 @@ body::before {
       animation: fadeUp 0.8s ease forwards 0.8s;
     }
 
-    /* BOTONES */
     .hero-actions {
       display: flex;
       align-items: center;
@@ -276,8 +278,8 @@ body::before {
     }
 
     .btn-primary {
-      background: var(--cyan);
-      color: var(--bg);
+      background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+      color: #020408;
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 0.75rem;
@@ -288,9 +290,23 @@ body::before {
       border-radius: 2px;
       cursor: pointer;
       text-decoration: none;
-      transition: opacity 0.3s, transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      display: inline-block;
     }
-    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, #22d3ee, #0ea5e9, #7c3aed);
+      z-index: -1;
+      filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 2px;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(34,211,238,0.3); }
+    .btn-primary:hover::after { opacity: 0.6; }
 
     .btn-secondary {
       font-size: 0.75rem;
@@ -300,9 +316,8 @@ body::before {
       text-decoration: none;
       transition: color 0.3s;
     }
-    .btn-secondary:hover { color: var(--cyan); }
+    .btn-secondary:hover { color: var(--white); }
 
-    /* LINEA SEPARADORA */
     .divider {
       width: 100%;
       max-width: 900px;
@@ -312,180 +327,170 @@ body::before {
       position: relative;
       z-index: 1;
     }
-    /* PROCESO */
-.process {
-  position: relative;
-  z-index: 1;
-  padding: 7rem 6vw;
-  max-width: 1100px;
-  margin: 0 auto;
-}
 
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  position: relative;
-}
-
-.process-step {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0 2rem 0 0;
-  position: relative;
-}
-
-.step-number {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 800;
-  color: rgba(126,200,227,0.15);
-  line-height: 1;
-  margin-bottom: 1.2rem;
-}
-
-.step-line {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, var(--cyan-mid), transparent);
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.step-line::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan);
-}
-
-.step-line.hide {
-  background: transparent;
-}
-
-.step-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 0.8rem;
-}
-
-.step-desc {
-  font-size: 0.92rem;
-  color: var(--gray-light);
-  line-height: 1.8;
-  font-weight: 300;
-}
     /* STATS */
-.stats {
-  position: relative;
-  z-index: 1;
-  padding: 4rem 6vw;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+    .stats {
+      position: relative;
+      z-index: 1;
+      padding: 2.5rem 6vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px;
+      background: rgba(126,200,227,0.07);
+      border: 1px solid rgba(126,200,227,0.07);
+    }
+    .stat-item {
+      background: var(--bg2);
+      padding: 2.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.3s;
+    }
+    .stat-item:hover { background: #111d29; }
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--cyan);
+      line-height: 1;
+      display: inline;
+    }
+    .stat-suffix {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: rgba(126,200,227,0.5);
+      display: inline;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-top: 0.5rem;
+    }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5px;
-  background: rgba(126,200,227,0.07);
-  border: 1px solid rgba(126,200,227,0.07);
-}
+    /* PROCESO */
+    .process {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 6vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 2rem 0 0;
+    }
+    .step-number {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      color: rgba(126,200,227,0.15);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .step-line {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--cyan-mid), transparent);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .step-line::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+    .step-line.hide { background: transparent; }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .step-desc {
+      font-size: 0.92rem;
+      color: var(--gray-light);
+      line-height: 1.8;
+      font-weight: 300;
+    }
 
-.stat-item {
-  background: var(--bg2);
-  padding: 2.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  transition: background 0.3s;
-}
-
-.stat-item:hover { background: #111d29; }
-
-.stat-number {
-  font-family: 'Syne', sans-serif;
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--cyan);
-  line-height: 1;
-  display: inline;
-}
-
-.stat-suffix {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: rgba(126,200,227,0.5);
-  display: inline;
-}
-
-.stat-label {
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gray-light);
-  margin-top: 0.5rem;
-}
     /* SERVICIOS */
     .services {
       position: relative;
       z-index: 1;
-      padding: 7rem 6vw;
+      padding: 4rem 6vw;
       max-width: 1100px;
       margin: 0 auto;
     }
-
     .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
-
     .section-tag {
       font-size: 0.7rem;
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--cyan);
-      display: block;
-      margin-bottom: 0.8rem;
     }
-
+    .section-line {
+      flex: 1;
+      max-width: 48px;
+      height: 1px;
+      background: var(--cyan-mid);
+    }
     .section-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1;
-  color: var(--white);
-}
-
-    /* GRID 2x2 */
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--gray-light);
+      font-weight: 300;
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5px;
-      background: rgba(126,200,227,0.07);
-      border: 1px solid rgba(126,200,227,0.07);
+      background: rgba(126,200,227,0.08);
+      border: 1px solid rgba(126,200,227,0.08);
     }
-
     .service-card {
       background: var(--bg2);
       padding: 2.5rem;
       position: relative;
       overflow: hidden;
-      transition: background 0.4s;
+      transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
     }
-
     .service-card::before {
       content: '';
       position: absolute;
@@ -496,21 +501,17 @@ body::before {
       transform-origin: left;
       transition: transform 0.4s ease;
     }
-
-    .service-card:hover { background: #111d29; }
+    .service-card:hover { background: #111d29; transform: translateY(-4px); box-shadow: 0 20px 60px rgba(14,165,233,0.06); }
     .service-card:hover::before { transform: scaleX(1); }
-
+    .service-icon { width: 40px; height: 40px; margin-bottom: 1.5rem; }
     .service-number {
+      position: absolute;
+      top: 2rem; right: 2rem;
       font-family: 'Syne', sans-serif;
       font-size: 0.65rem;
       letter-spacing: 3px;
       color: rgba(126,200,227,0.2);
-      margin-bottom: 1.5rem;
-      display: block;
     }
-
-    .service-icon { width: 40px; height: 40px; margin-bottom: 1.5rem; }
-
     .service-title {
       font-family: 'Syne', sans-serif;
       font-size: 1.05rem;
@@ -518,21 +519,18 @@ body::before {
       color: var(--white);
       margin-bottom: 0.8rem;
     }
-
     .service-desc {
       font-size: 0.88rem;
       color: var(--gray-light);
       line-height: 1.75;
       font-weight: 300;
     }
-
     .service-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
       margin-top: 1.5rem;
     }
-
     .tag {
       font-size: 0.62rem;
       letter-spacing: 2px;
@@ -542,10 +540,152 @@ body::before {
       padding: 0.25rem 0.6rem;
     }
 
+    /* SOBRE MI */
+    .about {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 6vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-desc {
+      font-size: 0.92rem;
+      color: var(--gray-light);
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .about-card {
+      background: var(--bg2);
+      border: 1px solid rgba(126,200,227,0.1);
+      padding: 2.5rem;
+      position: relative;
+      transition: border-color 0.4s, box-shadow 0.4s;
+    }
+    .about-card:hover {
+      border-color: rgba(126,200,227,0.25);
+      box-shadow: 0 20px 60px rgba(14,165,233,0.06);
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+    }
+    .about-tag {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.8rem;
+    }
+    .about-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .about-role {
+      font-size: 0.8rem;
+      color: var(--gray-light);
+      margin-bottom: 1.5rem;
+    }
+    .about-divider {
+      height: 1px;
+      background: rgba(126,200,227,0.1);
+      margin-bottom: 1.5rem;
+    }
+    .about-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-label {
+      font-size: 0.62rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .about-value { font-size: 0.85rem; color: var(--gray-light); }
+
+    /* CONTACTO */
+    .contact {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 6vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-desc {
+      font-size: 0.95rem;
+      color: var(--gray-light);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .contact-value {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .contact-value:hover { color: var(--white); }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid rgba(126,200,227,0.12);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 2px;
+    }
+    .form-input:focus { border-color: var(--cyan-mid); }
+    .form-input::placeholder { color: var(--gray); }
+    .form-textarea { height: 130px; resize: none; }
+
     /* FOOTER */
     footer {
       border-top: 1px solid rgba(126,200,227,0.08);
-      padding: 2.5rem 6vw;
+      padding: 3rem 6vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -554,7 +694,6 @@ body::before {
       position: relative;
       z-index: 1;
     }
-
     .footer-logo {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
@@ -563,462 +702,244 @@ body::before {
       color: var(--cyan);
       text-transform: uppercase;
     }
+    .footer-copy { font-size: 0.72rem; color: var(--gray); letter-spacing: 1px; }
 
-    .footer-copy {
-      font-size: 0.72rem;
-      color: var(--gray);
-      letter-spacing: 1px;
+    /* WHATSAPP */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 56px; height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+    .whatsapp-btn svg { width: 28px; height: 28px; }
+    .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
 
     /* ANIMACIONES */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes rotateSlow {
       from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      to { transform: rotate(360deg); }
     }
-
+    @keyframes barGrow {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(40px);
+      filter: blur(4px);
+      transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    /* SOBRE MI */
-.about {
-  position: relative;
-  z-index: 1;
-  padding: 7rem 6vw;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+    .reveal.visible { opacity: 1; transform: translateY(0); filter: blur(0px); }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 6rem;
-  align-items: center;
-}
-
-.about-desc {
-  font-size: 0.92rem;
-  color: var(--gray-light);
-  line-height: 1.9;
-  font-weight: 300;
-  margin-bottom: 1.2rem;
-}
-
-.about-card {
-  background: var(--bg2);
-  border: 1px solid rgba(126,200,227,0.1);
-  padding: 2.5rem;
-  position: relative;
-}
-
-.about-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--cyan), transparent);
-}
-
-.about-tag {
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin-bottom: 0.8rem;
-}
-
-.about-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--white);
-  margin-bottom: 0.3rem;
-}
-
-.about-role {
-  font-size: 0.8rem;
-  color: var(--gray-light);
-  margin-bottom: 1.5rem;
-}
-
-.about-divider {
-  height: 1px;
-  background: rgba(126,200,227,0.1);
-  margin-bottom: 1.5rem;
-}
-
-.about-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  margin-bottom: 1.2rem;
-}
-
-.about-label {
-  font-size: 0.62rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-
-.about-value {
-  font-size: 0.85rem;
-  color: var(--gray-light);
-}
-    /* CONTACTO */
-.contact {
-  position: relative;
-  z-index: 1;
-  padding: 7rem 6vw;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 5rem;
-  align-items: start;
-}
-
-.contact-desc {
-  font-size: 0.95rem;
-  color: var(--gray-light);
-  line-height: 1.8;
-  font-weight: 300;
-  margin-bottom: 2.5rem;
-}
-
-.contact-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  margin-bottom: 1.5rem;
-}
-
-.contact-label {
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-
-.contact-value {
-  font-size: 0.9rem;
-  color: var(--gray-light);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.contact-value:hover { color: var(--white); }
-
-.form-group {
-  margin-bottom: 1.2rem;
-}
-
-.form-label {
-  display: block;
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin-bottom: 0.5rem;
-}
-
-.form-input {
-  width: 100%;
-  background: var(--bg2);
-  border: 1px solid rgba(126,200,227,0.12);
-  color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  padding: 0.85rem 1rem;
-  outline: none;
-  transition: border-color 0.3s;
-  border-radius: 2px;
-}
-
-.form-input:focus {
-  border-color: var(--cyan-mid);
-}
-
-.form-input::placeholder {
-  color: var(--gray);
-}
-
-.form-textarea {
-  height: 130px;
-  resize: none;
-}
-   /* WHATSAPP */
-.whatsapp-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 56px;
-  height: 56px;
-  background: #25d366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-  z-index: 999;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.whatsapp-btn svg {
-  width: 28px;
-  height: 28px;
-}
-
-.whatsapp-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 28px rgba(37,211,102,0.6);
-}
-   .services { padding: 4rem 6vw; }
-.process { padding: 4rem 6vw; }
-.stats { padding: 2.5rem 6vw; }
-.about { padding: 4rem 6vw; }
-.contact { padding: 4rem 6vw; }
-.hero { min-height: auto; padding: 6rem 6vw 3rem; }
-   @media (max-width: 600px) {
-  .services-grid { grid-template-columns: 1fr; }
-  .hero-actions { flex-direction: column; }
-  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .badge-1, .badge-2, .badge-3 { display: none; }
-  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-}
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .badge-1, .badge-2, .badge-3 { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-   <div class="top-bar"></div>
+<div class="top-bar"></div>
 <div class="corner corner-tl"></div>
 <div class="corner corner-tr"></div>
 <div class="corner corner-bl"></div>
 <div class="corner corner-br"></div>
 <div class="side-text side-text-left">MERIDIAN · RÍO GRANDE · 53°S</div>
 <div class="side-text side-text-right">AUTOMATIZACIONES · DISEÑO WEB · IA</div>
-  <section class="hero">
-    <div class="orb"></div>
 
-    <!-- LOGO CENTRADO ARRIBA -->
-    <div class="logo-wrap">
-  <div class="badge badge-1">⚡ Entrega rápida</div>
-  <div class="badge badge-2">✦ Diseño moderno</div>
-  <div class="badge badge-3">◈ IA integrada</div>
-  <svg class="logo-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="100" r="88" stroke="#7ec8e3" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.25"/>
-    <circle cx="100" cy="100" r="68" stroke="#7ec8e3" stroke-width="0.5" opacity="0.1"/>
-    <line x1="58" y1="122" x2="142" y2="122" stroke="#7ec8e3" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="66" y1="104" x2="134" y2="104" stroke="#7ec8e3" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="78" y1="86" x2="122" y2="86" stroke="#7ec8e3" stroke-width="2.5" stroke-linecap="round"/>
-    <circle cx="58" cy="122" r="3.5" fill="#7ec8e3"/>
-    <circle cx="66" cy="104" r="3.5" fill="#7ec8e3"/>
-    <circle cx="78" cy="86" r="3.5" fill="#7ec8e3"/>
-    <text x="100" y="155" font-family="'Syne', sans-serif" font-size="11" font-weight="800" letter-spacing="7" fill="#7ec8e3" text-anchor="middle">MERIDIAN</text>
-  </svg>
-</div>
+<nav id="navbar">
+  <div class="nav-logo">Meridian</div>
+  <div class="nav-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="nav-cta">Contactar</a>
+</nav>
 
-    <div class="hero-tag">Desarrollo web profesional</div>
+<section class="hero">
+  <div class="orb"></div>
+  <div class="logo-wrap">
+    <div class="badge badge-1">⚡ Entrega rápida</div>
+    <div class="badge badge-2">✦ Diseño moderno</div>
+    <div class="badge badge-3">◈ IA integrada</div>
+    <svg class="logo-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="88" stroke="#7ec8e3" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.25"/>
+      <circle cx="100" cy="100" r="68" stroke="#7ec8e3" stroke-width="0.5" opacity="0.1"/>
+      <line x1="58" y1="122" x2="142" y2="122" stroke="#7ec8e3" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="66" y1="104" x2="134" y2="104" stroke="#7ec8e3" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="78" y1="86" x2="122" y2="86" stroke="#7ec8e3" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="58" cy="122" r="3.5" fill="#7ec8e3"/>
+      <circle cx="66" cy="104" r="3.5" fill="#7ec8e3"/>
+      <circle cx="78" cy="86" r="3.5" fill="#7ec8e3"/>
+      <text x="100" y="155" font-family="'Syne', sans-serif" font-size="11" font-weight="800" letter-spacing="7" fill="#7ec8e3" text-anchor="middle">MERIDIAN</text>
+    </svg>
+  </div>
 
-    <h1 class="hero-title">
-  Tu presencia digital, <span>lista para convertir.</span>
-</h1>
+  <div class="hero-tag">Desarrollo web profesional</div>
+  <h1 class="hero-title">Tu presencia digital, <span>lista para convertir.</span></h1>
+  <p class="hero-desc">Diseñamos landing pages modernas y efectivas para cualquier negocio o proyecto. Resultados reales desde el primer día.</p>
+  <div class="hero-actions">
+    <a href="#servicios" class="btn-primary">Ver servicios</a>
+    <a href="#servicios" class="btn-secondary">Explorar →</a>
+  </div>
+</section>
 
-    <p class="hero-desc">
-      Diseñamos landing pages modernas y efectivas para cualquier negocio o proyecto. Resultados reales desde el primer día.
-    </p>
+<div class="divider"></div>
 
-    <div class="hero-actions">
-      <a href="#servicios" class="btn-primary">Ver servicios</a>
-      <a href="#servicios" class="btn-secondary">Explorar →</a>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-<!-- STATS -->
 <section class="stats">
   <div class="stats-grid">
     <div class="stat-item reveal">
-      <div class="stat-number" data-target="48">0</div>
-      <div class="stat-suffix">hs</div>
+      <div class="stat-number" data-target="48">0</div><div class="stat-suffix">hs</div>
       <div class="stat-label">Tiempo de entrega</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-number" data-target="100">0</div>
-      <div class="stat-suffix">%</div>
+      <div class="stat-number" data-target="100">0</div><div class="stat-suffix">%</div>
       <div class="stat-label">Responsive y moderno</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-number" data-target="3">0</div>
-      <div class="stat-suffix">+</div>
+      <div class="stat-number" data-target="3">0</div><div class="stat-suffix">+</div>
       <div class="stat-label">Servicios disponibles</div>
     </div>
     <div class="stat-item reveal">
-      <div class="stat-number" data-target="1">0</div>
-      <div class="stat-suffix">click</div>
+      <div class="stat-number" data-target="1">0</div><div class="stat-suffix">click</div>
       <div class="stat-label">Para contactarme</div>
     </div>
   </div>
 </section>
-   <!-- PROCESO -->
+
 <div class="divider"></div>
 
-<section class="process">
+<section class="process" id="proceso">
   <div class="section-header reveal">
     <span class="section-tag">Cómo trabajo</span>
-    <div class="section-title">El proceso.</div>
+    <div class="section-line"></div>
   </div>
-
+  <div class="section-title reveal">El proceso.</div>
   <div class="process-grid">
     <div class="process-step reveal">
       <div class="step-number">01</div>
       <div class="step-line"></div>
-      <div class="step-content">
-        <div class="step-title">Consulta inicial</div>
-        <p class="step-desc">Me contás tu proyecto, tus objetivos y qué necesitás. Sin compromisos.</p>
-      </div>
+      <div class="step-title">Consulta inicial</div>
+      <p class="step-desc">Me contás tu proyecto, tus objetivos y qué necesitás. Sin compromisos.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-number">02</div>
       <div class="step-line"></div>
-      <div class="step-content">
-        <div class="step-title">Diseño y desarrollo</div>
-        <p class="step-desc">Creo tu página con diseño personalizado, adaptado a tu marca y objetivos.</p>
-      </div>
+      <div class="step-title">Diseño y desarrollo</div>
+      <p class="step-desc">Creo tu página con diseño personalizado, adaptado a tu marca y objetivos.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-number">03</div>
       <div class="step-line"></div>
-      <div class="step-content">
-        <div class="step-title">Revisión</div>
-        <p class="step-desc">Te muestro el resultado y ajustamos lo que sea necesario hasta que quede perfecto.</p>
-      </div>
+      <div class="step-title">Revisión</div>
+      <p class="step-desc">Te muestro el resultado y ajustamos lo que sea necesario hasta que quede perfecto.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-number">04</div>
       <div class="step-line hide"></div>
-      <div class="step-content">
-        <div class="step-title">Entrega</div>
-        <p class="step-desc">Tu página lista, publicada en internet y lista para recibir clientes.</p>
-      </div>
+      <div class="step-title">Entrega</div>
+      <p class="step-desc">Tu página lista, publicada en internet y lista para recibir clientes.</p>
     </div>
   </div>
 </section>
-  <!-- SERVICIOS -->
-  <section class="services" id="servicios">
-    <div class="section-header reveal">
-      <span class="section-tag">Servicios</span>
-      <div class="section-title">Lo que hacemos.</div>
-    </div>
 
-    <div class="services-grid">
-
-      <div class="service-card reveal">
-        <span class="service-number">01</span>
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none">
-          <rect x="3" y="6" width="34" height="24" rx="2" stroke="#7ec8e3" stroke-width="1.5"/>
-          <line x1="3" y1="13" x2="37" y2="13" stroke="#7ec8e3" stroke-width="1.5"/>
-          <circle cx="8" cy="9.5" r="1.2" fill="#7ec8e3"/>
-          <circle cx="12" cy="9.5" r="1.2" fill="#7ec8e3"/>
-          <circle cx="16" cy="9.5" r="1.2" fill="#7ec8e3"/>
-          <line x1="13" y1="34" x2="27" y2="34" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="20" y1="30" x2="20" y2="34" stroke="#7ec8e3" stroke-width="1.5"/>
-        </svg>
-        <div class="service-title">Landing Page Esencial</div>
-        <p class="service-desc">Página clara y profesional para presentar tu negocio. Diseño personalizado y entrega rápida.</p>
-        <div class="service-tags">
-          <span class="tag">Diseño</span>
-          <span class="tag">Responsive</span>
-        </div>
-      </div>
-
-      <div class="service-card reveal">
-        <span class="service-number">02</span>
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="15" stroke="#7ec8e3" stroke-width="1.5"/>
-          <path d="M20 5 C15 12 15 28 20 35" stroke="#7ec8e3" stroke-width="1.5" fill="none"/>
-          <path d="M20 5 C25 12 25 28 20 35" stroke="#7ec8e3" stroke-width="1.5" fill="none"/>
-          <line x1="5" y1="20" x2="35" y2="20" stroke="#7ec8e3" stroke-width="1" opacity="0.4"/>
-        </svg>
-        <div class="service-title">Landing Page Premium</div>
-        <p class="service-desc">Diseño avanzado con animaciones, múltiples secciones y optimización SEO básica.</p>
-        <div class="service-tags">
-          <span class="tag">Animaciones</span>
-          <span class="tag">SEO</span>
-        </div>
-      </div>
-
-      <div class="service-card reveal">
-        <span class="service-number">03</span>
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none">
-          <path d="M6 30 L16 20 L23 27 L30 16 L37 23" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="16" cy="20" r="2" fill="#7ec8e3"/>
-          <circle cx="23" cy="27" r="2" fill="#7ec8e3"/>
-          <circle cx="30" cy="16" r="2" fill="#7ec8e3"/>
-        </svg>
-        <div class="service-title">Optimización</div>
-        <p class="service-desc">¿Tu página no convierte? La analizamos y rediseñamos para maximizar resultados.</p>
-        <div class="service-tags">
-          <span class="tag">Rediseño</span>
-          <span class="tag">Performance</span>
-        </div>
-      </div>
-
-      <div class="service-card reveal">
-        <span class="service-number">04</span>
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none">
-          <rect x="6" y="6" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
-          <rect x="22" y="6" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
-          <rect x="6" y="22" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
-          <rect x="22" y="22" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
-        </svg>
-        <div class="service-title">Mantenimiento</div>
-        <p class="service-desc">Actualizaciones, cambios de contenido y soporte continuo para que tu página siempre esté al día.</p>
-        <div class="service-tags">
-          <span class="tag">Soporte</span>
-          <span class="tag">Updates</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-   <!-- SOBRE MI -->
 <div class="divider"></div>
 
-<section class="about">
+<section class="services" id="servicios">
+  <div class="section-header reveal">
+    <span class="section-tag">Servicios</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="section-title reveal">Lo que hacemos.</div>
+  <p class="section-sub reveal">Páginas diseñadas para convertir visitantes en clientes, con tecnología moderna y entrega rápida.</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-number">01</span>
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none">
+        <rect x="3" y="6" width="34" height="24" rx="2" stroke="#7ec8e3" stroke-width="1.5"/>
+        <line x1="3" y1="13" x2="37" y2="13" stroke="#7ec8e3" stroke-width="1.5"/>
+        <circle cx="8" cy="9.5" r="1.2" fill="#7ec8e3"/>
+        <circle cx="12" cy="9.5" r="1.2" fill="#7ec8e3"/>
+        <circle cx="16" cy="9.5" r="1.2" fill="#7ec8e3"/>
+        <line x1="13" y1="34" x2="27" y2="34" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="20" y1="30" x2="20" y2="34" stroke="#7ec8e3" stroke-width="1.5"/>
+      </svg>
+      <div class="service-title">Landing Page Esencial</div>
+      <p class="service-desc">Página clara y profesional para presentar tu negocio. Diseño personalizado y entrega rápida.</p>
+      <div class="service-tags"><span class="tag">Diseño</span><span class="tag">Responsive</span></div>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-number">02</span>
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="15" stroke="#7ec8e3" stroke-width="1.5"/>
+        <path d="M20 5 C15 12 15 28 20 35" stroke="#7ec8e3" stroke-width="1.5" fill="none"/>
+        <path d="M20 5 C25 12 25 28 20 35" stroke="#7ec8e3" stroke-width="1.5" fill="none"/>
+        <line x1="5" y1="20" x2="35" y2="20" stroke="#7ec8e3" stroke-width="1" opacity="0.4"/>
+      </svg>
+      <div class="service-title">Landing Page Premium</div>
+      <p class="service-desc">Diseño avanzado con animaciones, múltiples secciones y optimización SEO básica.</p>
+      <div class="service-tags"><span class="tag">Animaciones</span><span class="tag">SEO</span></div>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-number">03</span>
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none">
+        <path d="M6 30 L16 20 L23 27 L30 16 L37 23" stroke="#7ec8e3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="20" r="2" fill="#7ec8e3"/>
+        <circle cx="23" cy="27" r="2" fill="#7ec8e3"/>
+        <circle cx="30" cy="16" r="2" fill="#7ec8e3"/>
+      </svg>
+      <div class="service-title">Optimización</div>
+      <p class="service-desc">¿Tu página no convierte? La analizamos y rediseñamos para maximizar resultados.</p>
+      <div class="service-tags"><span class="tag">Rediseño</span><span class="tag">Performance</span></div>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-number">04</span>
+      <svg class="service-icon" viewBox="0 0 40 40" fill="none">
+        <rect x="6" y="6" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
+        <rect x="22" y="6" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
+        <rect x="6" y="22" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
+        <rect x="22" y="22" width="12" height="12" rx="1" stroke="#7ec8e3" stroke-width="1.5"/>
+      </svg>
+      <div class="service-title">Mantenimiento</div>
+      <p class="service-desc">Actualizaciones, cambios de contenido y soporte continuo para que tu página siempre esté al día.</p>
+      <div class="service-tags"><span class="tag">Soporte</span><span class="tag">Updates</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="about" id="about">
   <div class="about-grid">
     <div class="about-left reveal">
       <div class="section-header" style="text-align:left; margin-bottom: 1rem;">
         <span class="section-tag">Sobre Meridian</span>
       </div>
-      <h2 class="section-title" style="text-align:left; margin-bottom: 1.5rem;">Por qué existe<br>Meridian.</h2>
-      <p class="about-desc">
-        Meridian nace desde el sur del mundo, desde Río Grande, Tierra del Fuego, con una convicción clara: cualquier negocio o proyecto merece una presencia digital profesional, sin importar su tamaño o ubicación.
-      </p>
-      <p class="about-desc">
-        Vivimos en un momento donde la inteligencia artificial permite construir soluciones de alto nivel en menos tiempo y con mayor precisión. Meridian aprovecha esas herramientas para ofrecer un servicio que antes solo estaba al alcance de grandes empresas.
-      </p>
-      <p class="about-desc">
-        No somos una agencia masiva. Somos un proyecto que cree en el trabajo bien hecho, en la atención personalizada y en resultados concretos.
-      </p>
+      <div class="section-title" style="text-align:left; margin-bottom: 1.5rem;">Por qué existe<br>Meridian.</div>
+      <p class="about-desc">Meridian nace desde el sur del mundo, desde Río Grande, Tierra del Fuego, con una convicción clara: cualquier negocio o proyecto merece una presencia digital profesional, sin importar su tamaño o ubicación.</p>
+      <p class="about-desc">Vivimos en un momento donde la inteligencia artificial permite construir soluciones de alto nivel en menos tiempo y con mayor precisión. Meridian aprovecha esas herramientas para ofrecer un servicio que antes solo estaba al alcance de grandes empresas.</p>
+      <p class="about-desc">No somos una agencia masiva. Somos un proyecto que cree en el trabajo bien hecho, en la atención personalizada y en resultados concretos.</p>
     </div>
-
     <div class="about-right reveal">
       <div class="about-card">
         <div class="about-tag">Fundador</div>
@@ -1041,20 +962,18 @@ body::before {
     </div>
   </div>
 </section>
-  <!-- CONTACTO -->
+
 <div class="divider"></div>
 
 <section class="contact" id="contacto">
   <div class="section-header reveal">
     <span class="section-tag">Contacto</span>
-    <div class="section-title">Hablemos.</div>
+    <div class="section-line"></div>
   </div>
-
+  <div class="section-title reveal">Hablemos.</div>
   <div class="contact-grid">
     <div class="contact-info reveal">
-      <p class="contact-desc">
-        ¿Tenés un proyecto en mente? Escribime y te respondo a la brevedad.
-      </p>
+      <p class="contact-desc">¿Tenés un proyecto en mente? Escribime y te respondo a la brevedad.</p>
       <div class="contact-detail">
         <span class="contact-label">Email</span>
         <a href="mailto:meridian.sout@gmail.com" class="contact-value">meridian.sout@gmail.com</a>
@@ -1064,88 +983,47 @@ body::before {
         <span class="contact-value">Río Grande, Tierra del Fuego · Argentina</span>
       </div>
     </div>
-
     <div class="contact-form reveal">
-      <div class="form-group">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-input" placeholder="Tu nombre"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-input" placeholder="tu@email.com"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Mensaje</label>
-        <textarea class="form-input form-textarea" placeholder="Contame sobre tu proyecto..."></textarea>
-      </div>
-      <button class="btn-primary" style="width:100%; padding: 1rem;">Enviar mensaje</button>
+      <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contacto"/>
+        <p style="display:none"><input name="bot-field"/></p>
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" name="nombre" class="form-input" placeholder="Tu nombre" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-input" placeholder="tu@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensaje</label>
+          <textarea name="mensaje" class="form-input form-textarea" placeholder="Contame sobre tu proyecto..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; padding: 1rem;">Enviar mensaje</button>
+      </form>
     </div>
   </div>
 </section>
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">Meridian</div>
-    <div class="footer-copy">© 2025 Meridian · Todos los derechos reservados</div>
-  </footer>
 
-  <script>
-  // TYPING EFFECT
-  const words = ["lista para convertir.", "hecha para destacar.", "que genera resultados.", "profesional y moderna."];
-  let wordIndex = 0;
-  let charIndex = 0;
-  let deleting = false;
-  const typingEl = document.getElementById('typing');
+<footer>
+  <div class="footer-logo">Meridian</div>
+  <div class="footer-copy">© 2026 Meridian · Todos los derechos reservados</div>
+</footer>
 
-  function type() {
-    const current = words[wordIndex];
-    if (!deleting) {
-      typingEl.textContent = current.slice(0, charIndex + 1);
-      charIndex++;
-      if (charIndex === current.length) {
-        deleting = true;
-        setTimeout(type, 2000);
-        return;
-      }
-    } else {
-      typingEl.textContent = current.slice(0, charIndex - 1);
-      charIndex--;
-      if (charIndex === 0) {
-        deleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-      }
-    }
-    setTimeout(type, deleting ? 50 : 80);
-  }
+<a href="https://wa.me/543456447790" target="_blank" class="whatsapp-btn" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.855L.057 23.943l6.235-1.637A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.37l-.36-.214-3.7.971.988-3.607-.235-.372A9.818 9.818 0 1112 21.818z"/>
+  </svg>
+</a>
 
-  setTimeout(type, 1200); 
-  // CONTADOR ANIMADO
-function animateCounter(el) {
-  const target = parseInt(el.getAttribute('data-target'));
-  const duration = 1500;
-  const step = target / (duration / 16);
-  let current = 0;
-  const timer = setInterval(() => {
-    current += step;
-    if (current >= target) {
-      el.textContent = target;
-      clearInterval(timer);
-    } else {
-      el.textContent = Math.floor(current);
-    }
-  }, 16);
-}
-
-const statObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const number = entry.target.querySelector('.stat-number');
-      if (number) animateCounter(number);
-      statObserver.unobserve(entry.target);
-    }
+<script>
+  // NAVBAR SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
   });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('.stat-item').forEach(el => statObserver.observe(el));
 
   // SCROLL REVEAL
   const reveals = document.querySelectorAll('.reveal');
@@ -1157,13 +1035,30 @@ document.querySelectorAll('.stat-item').forEach(el => statObserver.observe(el));
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
+
+  // CONTADOR ANIMADO
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-target'));
+    const duration = 1500;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { el.textContent = target; clearInterval(timer); }
+      else { el.textContent = Math.floor(current); }
+    }, 16);
+  }
+
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const number = entry.target.querySelector('.stat-number');
+        if (number) animateCounter(number);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.stat-item').forEach(el => statObserver.observe(el));
 </script>
- <!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/543456447790" target="_blank" class="whatsapp-btn" title="Escribime por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.855L.057 23.943l6.235-1.637A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.37l-.36-.214-3.7.971.988-3.607-.235-.372A9.818 9.818 0 1112 21.818z"/>
-  </svg>
-</a>
 </body>
 </html>
