@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meridian</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,14 +19,17 @@
       --gray-light: #8a9ab0;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
     body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      overflow-x: hidden;
-    }
+  background: #020408;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
 
     /* GRID DE FONDO */
     body::after {
@@ -34,9 +37,20 @@
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(126,200,227,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(126,200,227,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(126,200,227,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126,200,227,0.025) 1px, transparent 1px);
   background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(14,165,233,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(124,58,237,0.05) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -200,18 +214,32 @@
 
     /* TITULO */
     .hero-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-      color: var(--white);
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.6s;
-      max-width: 680px;
-    }
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+  max-width: 780px;
+}
 
-    .hero-title span { color: var(--cyan); }
+    .hero-title span {
+  background: linear-gradient(135deg, #0ea5e9, #22d3ee, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradShift 4s ease infinite;
+}
+
+@keyframes gradShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 .typing::after {
   content: '|';
@@ -310,11 +338,11 @@
 
 .step-number {
   font-family: 'Syne', sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 800;
   color: rgba(126,200,227,0.15);
   line-height: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .step-line {
@@ -343,16 +371,16 @@
 
 .step-title {
   font-family: 'Syne', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 }
 
 .step-desc {
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   color: var(--gray-light);
-  line-height: 1.75;
+  line-height: 1.8;
   font-weight: 300;
 }
     /* STATS */
@@ -433,12 +461,13 @@
     }
 
     .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--white);
-    }
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  color: var(--white);
+}
 
     /* GRID 2x2 */
     .services-grid {
@@ -558,6 +587,91 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* SOBRE MI */
+.about {
+  position: relative;
+  z-index: 1;
+  padding: 7rem 6vw;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.about-desc {
+  font-size: 0.92rem;
+  color: var(--gray-light);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+
+.about-card {
+  background: var(--bg2);
+  border: 1px solid rgba(126,200,227,0.1);
+  padding: 2.5rem;
+  position: relative;
+}
+
+.about-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+
+.about-tag {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 0.8rem;
+}
+
+.about-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.about-role {
+  font-size: 0.8rem;
+  color: var(--gray-light);
+  margin-bottom: 1.5rem;
+}
+
+.about-divider {
+  height: 1px;
+  background: rgba(126,200,227,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.about-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.about-label {
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.about-value {
+  font-size: 0.85rem;
+  color: var(--gray-light);
+}
     /* CONTACTO */
 .contact {
   position: relative;
@@ -643,6 +757,40 @@
   height: 130px;
   resize: none;
 }
+   /* WHATSAPP */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.whatsapp-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+}
+   .services { padding: 4rem 6vw; }
+.process { padding: 4rem 6vw; }
+.stats { padding: 2.5rem 6vw; }
+.about { padding: 4rem 6vw; }
+.contact { padding: 4rem 6vw; }
+.hero { min-height: auto; padding: 6rem 6vw 3rem; }
    @media (max-width: 600px) {
   .services-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
@@ -650,6 +798,7 @@
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .process-grid { grid-template-columns: 1fr; gap: 2rem; }
   .badge-1, .badge-2, .badge-3 { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
 }
   </style>
 </head>
@@ -849,6 +998,49 @@
 
     </div>
   </section>
+   <!-- SOBRE MI -->
+<div class="divider"></div>
+
+<section class="about">
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="section-header" style="text-align:left; margin-bottom: 1rem;">
+        <span class="section-tag">Sobre Meridian</span>
+      </div>
+      <h2 class="section-title" style="text-align:left; margin-bottom: 1.5rem;">Por qué existe<br>Meridian.</h2>
+      <p class="about-desc">
+        Meridian nace desde el sur del mundo, desde Río Grande, Tierra del Fuego, con una convicción clara: cualquier negocio o proyecto merece una presencia digital profesional, sin importar su tamaño o ubicación.
+      </p>
+      <p class="about-desc">
+        Vivimos en un momento donde la inteligencia artificial permite construir soluciones de alto nivel en menos tiempo y con mayor precisión. Meridian aprovecha esas herramientas para ofrecer un servicio que antes solo estaba al alcance de grandes empresas.
+      </p>
+      <p class="about-desc">
+        No somos una agencia masiva. Somos un proyecto que cree en el trabajo bien hecho, en la atención personalizada y en resultados concretos.
+      </p>
+    </div>
+
+    <div class="about-right reveal">
+      <div class="about-card">
+        <div class="about-tag">Fundador</div>
+        <div class="about-name">Brian Jerez</div>
+        <div class="about-role">Desarrollo web · IA · Automatizaciones</div>
+        <div class="about-divider"></div>
+        <div class="about-item">
+          <span class="about-label">Ubicación</span>
+          <span class="about-value">Río Grande, Tierra del Fuego · Argentina</span>
+        </div>
+        <div class="about-item">
+          <span class="about-label">Enfoque</span>
+          <span class="about-value">Landing pages y automatizaciones con IA</span>
+        </div>
+        <div class="about-item">
+          <span class="about-label">Disponibilidad</span>
+          <span class="about-value">Abierto a nuevos proyectos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
   <!-- CONTACTO -->
 <div class="divider"></div>
 
@@ -966,6 +1158,12 @@ document.querySelectorAll('.stat-item').forEach(el => statObserver.observe(el));
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 </script>
-
+ <!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/543456447790" target="_blank" class="whatsapp-btn" title="Escribime por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.523 5.855L.057 23.943l6.235-1.637A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.37l-.36-.214-3.7.971.988-3.607-.235-.372A9.818 9.818 0 1112 21.818z"/>
+  </svg>
+</a>
 </body>
 </html>
