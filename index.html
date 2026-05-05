@@ -695,14 +695,36 @@
       z-index: 1;
     }
     .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.8rem;
-      letter-spacing: 6px;
-      color: var(--cyan);
-      text-transform: uppercase;
-    }
-    .footer-copy { font-size: 0.72rem; color: var(--gray); letter-spacing: 1px; }
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 6px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.footer-tagline {
+  font-size: 0.7rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+}
+.footer-left { display: flex; flex-direction: column; }
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.footer-links a {
+  font-size: 0.75rem;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--cyan); }
+.footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+.footer-copy { font-size: 0.72rem; color: var(--gray); letter-spacing: 1px; }
+.footer-location { font-size: 0.68rem; color: rgba(74,122,148,0.6); letter-spacing: 1px; }
 
     /* WHATSAPP */
     .whatsapp-btn {
@@ -1006,8 +1028,20 @@
 </section>
 
 <footer>
-  <div class="footer-logo">Meridian</div>
-  <div class="footer-copy">© 2026 Meridian · Todos los derechos reservados</div>
+  <div class="footer-left">
+    <div class="footer-logo">Meridian</div>
+    <div class="footer-tagline">Desarrollo web · IA · Argentina</div>
+  </div>
+  <div class="footer-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#about">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="footer-right">
+    <div class="footer-copy">© 2026 Meridian</div>
+    <div class="footer-location">Río Grande · Tierra del Fuego · Argentina</div>
+  </div>
 </footer>
 
 <a href="https://wa.me/543456447790" target="_blank" class="whatsapp-btn" title="WhatsApp">
@@ -1059,6 +1093,42 @@
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('.stat-item').forEach(el => statObserver.observe(el));
+  // PARTÍCULAS
+const canvas = document.createElement('canvas');
+canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;';
+document.body.prepend(canvas);
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const particles = Array.from({length: 60}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.5 + 0.3,
+  dx: (Math.random() - 0.5) * 0.3,
+  dy: (Math.random() - 0.5) * 0.3,
+  o: Math.random() * 0.4 + 0.1
+}));
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(126,200,227,${p.o})`;
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
 </script>
 </body>
 </html>
